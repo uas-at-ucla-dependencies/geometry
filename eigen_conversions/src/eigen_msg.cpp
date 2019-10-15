@@ -32,14 +32,14 @@
 
 namespace tf {
 
-void pointMsgToEigen(const geometry_msgs::Point &m, Eigen::Vector3d &e)
+void pointMsgToEigen(const geometry_msgs::msg::Point &m, Eigen::Vector3d &e)
 {
   e(0) = m.x; 
   e(1) = m.y; 
   e(2) = m.z; 
 }
 
-void pointEigenToMsg(const Eigen::Vector3d &e, geometry_msgs::Point &m)
+void pointEigenToMsg(const Eigen::Vector3d &e, geometry_msgs::msg::Point &m)
 {
   m.x = e(0);
   m.y = e(1);
@@ -48,7 +48,7 @@ void pointEigenToMsg(const Eigen::Vector3d &e, geometry_msgs::Point &m)
 
 namespace {
   template<typename T>
-  void poseMsgToEigenImpl(const geometry_msgs::Pose &m, T &e)
+  void poseMsgToEigenImpl(const geometry_msgs::msg::Pose &m, T &e)
   {
     e = Eigen::Translation3d(m.position.x,
                              m.position.y,
@@ -60,7 +60,7 @@ namespace {
   }
 
   template<typename T>
-  void poseEigenToMsgImpl(const T &e, geometry_msgs::Pose &m)
+  void poseEigenToMsgImpl(const T &e, geometry_msgs::msg::Pose &m)
   {
     m.position.x = e.translation()[0];
     m.position.y = e.translation()[1];
@@ -79,7 +79,7 @@ namespace {
   }
 
   template<typename T>
-  void transformMsgToEigenImpl(const geometry_msgs::Transform &m, T &e)
+  void transformMsgToEigenImpl(const geometry_msgs::msg::Transform &m, T &e)
   {
     e = Eigen::Translation3d(m.translation.x,
                              m.translation.y,
@@ -91,7 +91,7 @@ namespace {
   }
 
   template<typename T>
-  void transformEigenToMsgImpl(const T &e, geometry_msgs::Transform &m)
+  void transformEigenToMsgImpl(const T &e, geometry_msgs::msg::Transform &m)
   {
     m.translation.x = e.translation()[0];
     m.translation.y = e.translation()[1];
@@ -110,32 +110,32 @@ namespace {
   }
 }
 
-void poseMsgToEigen(const geometry_msgs::Pose &m, Eigen::Affine3d &e)
+void poseMsgToEigen(const geometry_msgs::msg::Pose &m, Eigen::Affine3d &e)
 {
   poseMsgToEigenImpl(m, e);
 }
 
-void poseMsgToEigen(const geometry_msgs::Pose &m, Eigen::Isometry3d &e)
+void poseMsgToEigen(const geometry_msgs::msg::Pose &m, Eigen::Isometry3d &e)
 {
   poseMsgToEigenImpl(m, e);
 }
 
-void poseEigenToMsg(const Eigen::Affine3d &e, geometry_msgs::Pose &m)
+void poseEigenToMsg(const Eigen::Affine3d &e, geometry_msgs::msg::Pose &m)
 {
   poseEigenToMsgImpl(e, m);
 }
 
-void poseEigenToMsg(const Eigen::Isometry3d &e, geometry_msgs::Pose &m)
+void poseEigenToMsg(const Eigen::Isometry3d &e, geometry_msgs::msg::Pose &m)
 {
   poseEigenToMsgImpl(e, m);
 }
 
-void quaternionMsgToEigen(const geometry_msgs::Quaternion &m, Eigen::Quaterniond &e)
+void quaternionMsgToEigen(const geometry_msgs::msg::Quaternion &m, Eigen::Quaterniond &e)
 {
   e = Eigen::Quaterniond(m.w, m.x, m.y, m.z);
 }
 
-void quaternionEigenToMsg(const Eigen::Quaterniond &e, geometry_msgs::Quaternion &m)
+void quaternionEigenToMsg(const Eigen::Quaterniond &e, geometry_msgs::msg::Quaternion &m)
 {
   m.x = e.x();
   m.y = e.y();
@@ -143,41 +143,41 @@ void quaternionEigenToMsg(const Eigen::Quaterniond &e, geometry_msgs::Quaternion
   m.w = e.w();
 }
 
-void transformMsgToEigen(const geometry_msgs::Transform &m, Eigen::Affine3d &e)
+void transformMsgToEigen(const geometry_msgs::msg::Transform &m, Eigen::Affine3d &e)
 {
   transformMsgToEigenImpl(m, e);
 }
 
-void transformMsgToEigen(const geometry_msgs::Transform &m, Eigen::Isometry3d &e)
+void transformMsgToEigen(const geometry_msgs::msg::Transform &m, Eigen::Isometry3d &e)
 {
   transformMsgToEigenImpl(m, e);
 }
 
-void transformEigenToMsg(const Eigen::Affine3d &e, geometry_msgs::Transform &m)
+void transformEigenToMsg(const Eigen::Affine3d &e, geometry_msgs::msg::Transform &m)
 {
   transformEigenToMsgImpl(e, m);
 }
 
-void transformEigenToMsg(const Eigen::Isometry3d &e, geometry_msgs::Transform &m)
+void transformEigenToMsg(const Eigen::Isometry3d &e, geometry_msgs::msg::Transform &m)
 {
   transformEigenToMsgImpl(e, m);
 }
 
-void vectorMsgToEigen(const geometry_msgs::Vector3 &m, Eigen::Vector3d &e)
+void vectorMsgToEigen(const geometry_msgs::msg::Vector3 &m, Eigen::Vector3d &e)
 {
   e(0) = m.x; 
   e(1) = m.y; 
   e(2) = m.z; 
 }
 
-void vectorEigenToMsg(const Eigen::Vector3d &e, geometry_msgs::Vector3 &m)
+void vectorEigenToMsg(const Eigen::Vector3d &e, geometry_msgs::msg::Vector3 &m)
 {
   m.x = e(0);
   m.y = e(1);
   m.z = e(2);
 }
 
-void twistMsgToEigen(const geometry_msgs::Twist &m, Eigen::Matrix<double,6,1> &e)
+void twistMsgToEigen(const geometry_msgs::msg::Twist &m, Eigen::Matrix<double,6,1> &e)
 {
   e[0] = m.linear.x;
   e[1] = m.linear.y;
@@ -187,7 +187,7 @@ void twistMsgToEigen(const geometry_msgs::Twist &m, Eigen::Matrix<double,6,1> &e
   e[5] = m.angular.z;
 }
 
-void twistEigenToMsg(const Eigen::Matrix<double,6,1> &e, geometry_msgs::Twist &m)
+void twistEigenToMsg(const Eigen::Matrix<double,6,1> &e, geometry_msgs::msg::Twist &m)
 {
   m.linear.x = e[0];
   m.linear.y = e[1];
@@ -197,7 +197,7 @@ void twistEigenToMsg(const Eigen::Matrix<double,6,1> &e, geometry_msgs::Twist &m
   m.angular.z = e[5];
 }
 
-void wrenchMsgToEigen(const geometry_msgs::Wrench &m, Eigen::Matrix<double,6,1> &e)
+void wrenchMsgToEigen(const geometry_msgs::msg::Wrench &m, Eigen::Matrix<double,6,1> &e)
 {
   e[0] = m.force.x;
   e[1] = m.force.y;
@@ -207,7 +207,7 @@ void wrenchMsgToEigen(const geometry_msgs::Wrench &m, Eigen::Matrix<double,6,1> 
   e[5] = m.torque.z;
 }
 
-void wrenchEigenToMsg(const Eigen::Matrix<double,6,1> &e, geometry_msgs::Wrench &m)
+void wrenchEigenToMsg(const Eigen::Matrix<double,6,1> &e, geometry_msgs::msg::Wrench &m)
 {
   m.force.x = e[0];
   m.force.y = e[1];

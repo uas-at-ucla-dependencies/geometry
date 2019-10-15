@@ -1,31 +1,29 @@
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.10)
 project(eigen_conversions)
 
+find_package(ament_cmake REQUIRED)
 find_package(orocos_kdl REQUIRED)
-find_package(catkin REQUIRED geometry_msgs std_msgs)
+find_package(geometry_msgs REQUIRED)
+find_package(std_msgs REQUIRED)
 find_package(Eigen3 REQUIRED)
 
-include_directories(SYSTEM ${EIGEN3_INCLUDE_DIRS})
-include_directories(include ${catkin_INCLUDE_DIRS} ${orocos_kdl_INCLUDE_DIRS})
-link_directories(${catkin_LIBRARY_DIRS})
-link_directories(${orocos_kdl_LIBRARY_DIRS})
+include(GNUInstallDirs)
 
-catkin_package(
-  INCLUDE_DIRS include ${EIGEN3_INCLUDE_DIRS}
-  LIBRARIES ${PROJECT_NAME}
-  CATKIN_DEPENDS geometry_msgs std_msgs
-  DEPENDS orocos_kdl
-)
+include_directories(include)
 
 add_library(${PROJECT_NAME}
   src/eigen_msg.cpp
   src/eigen_kdl.cpp
 )
-add_dependencies(${PROJECT_NAME} ${catkin_EXPORTED_TARGETS})
-target_link_libraries(${PROJECT_NAME} ${catkin_LIBRARIES} ${orocos_kdl_LIBRARIES})
+ament_target_dependencies(${PROJECT_NAME} std_msgs geometry_msgs orocos_kdl Eigen3)
 
 install(DIRECTORY include/${PROJECT_NAME}/
-  DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION})
+  DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME})
 
 install(TARGETS ${PROJECT_NAME}
-  DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION})
+  RUNTIME DESTINATION ${CMAKE_INSTALL_LIBDIR})
+
+ament_export_libraries(${PROJECT_NAME})
+ament_export_dependencies(geometry_msgs std_msgs Eigen3 orocos_kdl)
+ament_export_include_directories(include)
+ament_package()

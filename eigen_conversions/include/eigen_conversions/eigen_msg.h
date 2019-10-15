@@ -34,14 +34,14 @@
 #ifndef EIGEN_MSG_CONVERSIONS_H
 #define EIGEN_MSG_CONVERSIONS_H
 
-#include <std_msgs/Float64MultiArray.h>
-#include <geometry_msgs/Point.h>
-#include <geometry_msgs/Pose.h>
-#include <geometry_msgs/Quaternion.h>
-#include <geometry_msgs/Transform.h>
-#include <geometry_msgs/Twist.h>
-#include <geometry_msgs/Vector3.h>
-#include <geometry_msgs/Wrench.h>
+#include <std_msgs/msg/float64_multi_array.hpp>
+#include <geometry_msgs/msg/point.hpp>
+#include <geometry_msgs/msg/pose.hpp>
+#include <geometry_msgs/msg/quaternion.hpp>
+#include <geometry_msgs/msg/transform.hpp>
+#include <geometry_msgs/msg/twist.hpp>
+#include <geometry_msgs/msg/vector3.hpp>
+#include <geometry_msgs/msg/wrench.hpp>
 
 #include <Eigen/Core>
 #include <Eigen/Geometry>
@@ -49,62 +49,62 @@
 namespace tf {
 
 /// Converts a Point message into an Eigen Vector
-void pointMsgToEigen(const geometry_msgs::Point &m, Eigen::Vector3d &e);
+void pointMsgToEigen(const geometry_msgs::msg::Point &m, Eigen::Vector3d &e);
 
 /// Converts an Eigen Vector into a Point message
-void pointEigenToMsg(const Eigen::Vector3d &e, geometry_msgs::Point &m);
+void pointEigenToMsg(const Eigen::Vector3d &e, geometry_msgs::msg::Point &m);
 
 /// Converts a Pose message into an Eigen Affine3d
-void poseMsgToEigen(const geometry_msgs::Pose &m, Eigen::Affine3d &e);
+void poseMsgToEigen(const geometry_msgs::msg::Pose &m, Eigen::Affine3d &e);
 
 /// Converts a Pose message into an Eigen Isometry3d
-void poseMsgToEigen(const geometry_msgs::Pose &m, Eigen::Isometry3d &e);
+void poseMsgToEigen(const geometry_msgs::msg::Pose &m, Eigen::Isometry3d &e);
 
 /// Converts an Eigen Affine3d into a Pose message
-void poseEigenToMsg(const Eigen::Affine3d &e, geometry_msgs::Pose &m);
+void poseEigenToMsg(const Eigen::Affine3d &e, geometry_msgs::msg::Pose &m);
 
 /// Converts an Eigen Isometry3d into a Pose message
-void poseEigenToMsg(const Eigen::Isometry3d &e, geometry_msgs::Pose &m);
+void poseEigenToMsg(const Eigen::Isometry3d &e, geometry_msgs::msg::Pose &m);
 
 /// Converts a Quaternion message into an Eigen Quaternion
-void quaternionMsgToEigen(const geometry_msgs::Quaternion &m, Eigen::Quaterniond &e);
+void quaternionMsgToEigen(const geometry_msgs::msg::Quaternion &m, Eigen::Quaterniond &e);
 
 /// Converts an Eigen Quaternion into a Quaternion message
-void quaternionEigenToMsg(const Eigen::Quaterniond &e, geometry_msgs::Quaternion &m);
+void quaternionEigenToMsg(const Eigen::Quaterniond &e, geometry_msgs::msg::Quaternion &m);
 
 /// Converts a Transform message into an Eigen Affine3d
-void transformMsgToEigen(const geometry_msgs::Transform &m, Eigen::Affine3d &e);
+void transformMsgToEigen(const geometry_msgs::msg::Transform &m, Eigen::Affine3d &e);
 
 /// Converts a Transform message into an Eigen Isometry3d
-void transformMsgToEigen(const geometry_msgs::Transform &m, Eigen::Isometry3d &e);
+void transformMsgToEigen(const geometry_msgs::msg::Transform &m, Eigen::Isometry3d &e);
 
 /// Converts an Eigen Affine3d into a Transform message
-void transformEigenToMsg(const Eigen::Affine3d &e, geometry_msgs::Transform &m);
+void transformEigenToMsg(const Eigen::Affine3d &e, geometry_msgs::msg::Transform &m);
 
 /// Converts an Eigen Isometry3d into a Transform message
-void transformEigenToMsg(const Eigen::Isometry3d &e, geometry_msgs::Transform &m);
+void transformEigenToMsg(const Eigen::Isometry3d &e, geometry_msgs::msg::Transform &m);
 
 /// Converts a Twist message into an Eigen matrix
-void twistMsgToEigen(const geometry_msgs::Twist &m, Eigen::Matrix<double,6,1> &e);
+void twistMsgToEigen(const geometry_msgs::msg::Twist &m, Eigen::Matrix<double,6,1> &e);
 
 /// Converts an Eigen matrix into a Twist message
-void twistEigenToMsg(const Eigen::Matrix<double,6,1> &e, geometry_msgs::Twist &m);
+void twistEigenToMsg(const Eigen::Matrix<double,6,1> &e, geometry_msgs::msg::Twist &m);
 
 /// Converts a Vector message into an Eigen Vector
-void vectorMsgToEigen(const geometry_msgs::Vector3 &m, Eigen::Vector3d &e);
+void vectorMsgToEigen(const geometry_msgs::msg::Vector3 &m, Eigen::Vector3d &e);
 
 /// Converts an Eigen Vector into a Vector message
-void vectorEigenToMsg(const Eigen::Vector3d &e, geometry_msgs::Vector3 &m);
+void vectorEigenToMsg(const Eigen::Vector3d &e, geometry_msgs::msg::Vector3 &m);
 
 /// Converts a Wrench message into an Eigen matrix
-void wrenchMsgToEigen(const geometry_msgs::Wrench &m, Eigen::Matrix<double,6,1> &e);
+void wrenchMsgToEigen(const geometry_msgs::msg::Wrench &m, Eigen::Matrix<double,6,1> &e);
 
 /// Converts an Eigen matrix into a Wrench message
-void wrenchEigenToMsg(const Eigen::Matrix<double,6,1> &e, geometry_msgs::Wrench &m);
+void wrenchEigenToMsg(const Eigen::Matrix<double,6,1> &e, geometry_msgs::msg::Wrench &m);
 
 /// Converts an Eigen matrix into a Float64MultiArray message
 template <class Derived>
-void matrixEigenToMsg(const Eigen::MatrixBase<Derived> &e, std_msgs::Float64MultiArray &m)
+void matrixEigenToMsg(const Eigen::MatrixBase<Derived> &e, std_msgs::msg::Float64MultiArray &m)
 {
   if (m.layout.dim.size() != 2)
     m.layout.dim.resize(2);

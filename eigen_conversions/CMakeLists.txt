@@ -11,7 +11,7 @@ include(GNUInstallDirs)
 
 include_directories(include)
 
-add_library(${PROJECT_NAME}
+add_library(${PROJECT_NAME} SHARED
   src/eigen_msg.cpp
   src/eigen_kdl.cpp
 )
@@ -22,6 +22,7 @@ install(DIRECTORY include/${PROJECT_NAME}/
 
 install(TARGETS ${PROJECT_NAME}
   ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+  LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
   RUNTIME DESTINATION ${CMAKE_INSTALL_LIBDIR})
 
 ament_export_libraries(${PROJECT_NAME})
